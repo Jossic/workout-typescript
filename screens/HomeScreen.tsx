@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 interface HomeScreenProps {}
 
-const HomeScreen: React.FC<HomeScreenProps> = () => {
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<Text style={{ fontSize: 20, color: 'black' }}>Home Screen</Text>
+			<Button
+				title='Go to planner'
+				onPress={() => navigation.navigate('Planner')}
+			/>
 		</View>
 	);
 };

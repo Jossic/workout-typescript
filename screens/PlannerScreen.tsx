@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 interface PlannerScreenProps {}
 
-const PlannerScreen: React.FC<PlannerScreenProps> = () => {
+const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<Text>PlannerScreen</Text>
+			<Button
+				title='Go to Home'
+				onPress={() => navigation.navigate('Home')}
+			/>
 		</View>
 	);
 };
@@ -16,7 +20,7 @@ export default PlannerScreen;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#d3d3d3',
-		paddingHorizontal: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 });
