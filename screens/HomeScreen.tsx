@@ -6,9 +6,7 @@ interface HomeScreenProps {}
 const HomeScreen: React.FC<HomeScreenProps> = () => {
 	return (
 		<View style={styles.container}>
-			<Text>Home Screen</Text>
-			<Text>Home Screen</Text>
-			<Text>Home Screen</Text>
+			<Text style={{ fontSize: 20, color: 'black' }}>Home Screen</Text>
 		</View>
 	);
 };
@@ -20,6 +18,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: 'red',
 	},
 });

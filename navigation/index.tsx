@@ -5,7 +5,7 @@ import PlannerScreen from '../screens/PlannerScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function Navigation() {
+export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator initialRouteName='Home'>
