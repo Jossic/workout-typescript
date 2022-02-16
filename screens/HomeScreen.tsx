@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import HomeScreen from './screens/HomeScreen';
 
-export default function App() {
+interface HomeScreenProps {}
+
+const HomeScreen: React.FC<HomeScreenProps> = () => {
 	return (
 		<View style={styles.container}>
-			<HomeScreen />
-			{/* <StatusBar style='auto' /> */}
+			<Text>Home Screen</Text>
 		</View>
 	);
-}
+};
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		// backgroundColor: 'red',
 	},
 });
