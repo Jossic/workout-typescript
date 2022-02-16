@@ -1,7 +1,8 @@
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-interface HomeScreenProps {}
+type HomeScreenProps = NativeStackHeaderProps;
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 	return (

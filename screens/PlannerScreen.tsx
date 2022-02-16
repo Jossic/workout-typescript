@@ -1,7 +1,8 @@
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-interface PlannerScreenProps {}
+type PlannerScreenProps = NativeStackHeaderProps;
 
 const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 	return (
