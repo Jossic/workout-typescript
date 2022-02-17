@@ -11,7 +11,7 @@ type HomeScreenProps = NativeStackHeaderProps;
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
-			<OrbitonText>Workouuuuts</OrbitonText>
+			<OrbitonText style={{ fontSize: 30 }}>Workouuuuts</OrbitonText>
 			<FlatList
 				data={data as Workout[]}
 				keyExtractor={(item) => item.slug}

@@ -1,16 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-interface OrbitonTextProps {}
+type OrbitonTextProps = Text['props'];
 
-const OrbitonText: React.FC<OrbitonTextProps> = ({ children }) => {
-	return <Text style={styles.header}>{children}</Text>;
+const OrbitonText: React.FC<OrbitonTextProps> = (props) => {
+	return (
+		<Text {...props} style={[props.style, { fontFamily: 'OrbitonBold' }]} />
+	);
 };
 
 export default OrbitonText;
-
-const styles = StyleSheet.create({
-	header: {
-		fontFamily: 'OrbitonBold',
-	},
-});
