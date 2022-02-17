@@ -5,19 +5,15 @@ import Navigation from './navigation';
 
 export default function App() {
 	const isLoaded = useCachedResources();
-	return (
-		<>
-			<Navigation />
-			<StatusBar style='auto' />
-		</>
-	);
+
+	if (isLoaded) {
+		return (
+			<>
+				<Navigation />
+				<StatusBar style='auto' />
+			</>
+		);
+	} else return null;
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: 'red',
-	},
-});
+const styles = StyleSheet.create({});
