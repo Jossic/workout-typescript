@@ -17,7 +17,11 @@ const Stack = createNativeStackNavigator();
 function RootNavigator() {
 	return (
 		<Stack.Navigator initialRouteName='Root'>
-			<Stack.Screen name='Root' component={TabNavigator} />
+			<Stack.Screen
+				name='Root'
+				component={TabNavigator}
+				options={{ headerShown: false }}
+			/>
 		</Stack.Navigator>
 	);
 }
