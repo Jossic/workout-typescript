@@ -10,6 +10,8 @@ export const useCachedResources = () => {
 				await Font.loadAsync({
 					Lobster: require('../assets/fonts/Lobster-Regular.ttf'),
 					Shizuru: require('../assets/fonts/Shizuru-Regular.ttf'),
+					OrbitonBold: require('../assets/fonts/Orbitron-ExtraBold.ttf'),
+					Orbiton: require('../assets/fonts/Orbitron-Regular.ttf'),
 				});
 			} catch (error) {
 				console.warn(`error =>`, error);
