@@ -9,7 +9,11 @@ interface WorkoutItemProps {
 const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
 	return (
 		<View style={styles.container}>
-			<Text>{workout.name}</Text>
+			<Text style={styles.name}>{workout.name}</Text>
+			<Text style={styles.duration}>Durée: {workout.duration}</Text>
+			<Text style={styles.difficulty}>
+				Difficulté: {workout.difficulty}
+			</Text>
 		</View>
 	);
 };
@@ -18,11 +22,23 @@ export default WorkoutItem;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: '#d3d3d3',
-		paddingHorizontal: 25,
+		// flex: 1,
+		borderRadius: 10,
+		backgroundColor: '#fff',
+		padding: 10,
 		minWidth: '90%',
-		height: 30,
+		maxHeight: 100,
 		margin: 5,
+	},
+	name: {
+		fontSize: 15,
+		fontWeight: 'bold',
+		marginBottom: 5,
+	},
+	duration: {
+		fontSize: 15,
+	},
+	difficulty: {
+		fontSize: 15,
 	},
 });
