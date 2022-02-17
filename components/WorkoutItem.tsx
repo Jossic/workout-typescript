@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Workout } from '../types/data';
-import { secsToMins } from '../utils/time';
+import { formatSec } from '../utils/time';
 
 interface WorkoutItemProps {
 	workout: Workout;
@@ -12,7 +12,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
 		<View style={styles.container}>
 			<Text style={styles.name}>{workout.name}</Text>
 			<Text style={styles.duration}>
-				Durée: {secsToMins(workout.duration)} min
+				Durée: {formatSec(workout.duration)}
 			</Text>
 			<Text style={styles.difficulty}>
 				Difficulté: {workout.difficulty}
