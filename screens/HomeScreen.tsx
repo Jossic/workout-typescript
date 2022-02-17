@@ -1,6 +1,6 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import data from '../data.json';
 
 type HomeScreenProps = NativeStackHeaderProps;
@@ -8,10 +8,16 @@ type HomeScreenProps = NativeStackHeaderProps;
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
-			<Text style={{ fontSize: 20, color: 'black' }}>Home Screen</Text>
-			<Text style={{ fontSize: 10, color: 'black' }}>
-				{JSON.stringify(data)}
-			</Text>
+			{/* <Text style={{ fontSize: 20, color: 'black' }}>Home Screen</Text> */}
+			<FlatList
+				data={data}
+				keyExtractor={(item) => item.slug}
+				renderItem={({ item }) => (
+					<View>
+						<Text>{item.name}</Text>
+					</View>
+				)}
+			/>
 		</View>
 	);
 };
