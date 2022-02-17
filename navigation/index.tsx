@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import PlannerScreen from '../screens/PlannerScreen';
 
@@ -32,6 +32,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
 	return (
 		<Tab.Navigator
+			initialRouteName='Home'
 			screenOptions={({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
@@ -42,7 +43,6 @@ function TabNavigator() {
 						iconName = focused ? 'list' : 'list-outline';
 					}
 
-					// You can return any component that you like here!
 					return (
 						<Ionicons name={iconName} size={size} color={color} />
 					);
