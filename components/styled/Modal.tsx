@@ -10,7 +10,9 @@ import {
 } from 'react-native';
 import PressableText from './PressableText';
 
-interface ModalProps {}
+interface ModalProps {
+	activator?: React.FC<{ handleOpen: () => void }>;
+}
 
 const Modal: React.FC<ModalProps> = ({ activator: Activator }) => {
 	const { height, width } = useWindowDimensions();
@@ -42,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({ activator: Activator }) => {
 				</View>
 			</RNModal>
 			{Activator ? (
-				<Activator />
+				<Activator handleOpen={() => setModalVisible(!modalVisible)} />
 			) : (
 				<PressableText
 					text='Cheeck'

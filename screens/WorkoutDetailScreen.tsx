@@ -21,11 +21,8 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 		<View style={styles.container}>
 			<Text>WorkoutDetailScreen - {workout?.name}</Text>
 			<Modal
-				activator={() => (
-					<PressableText
-						text='Cheeck'
-						onPress={() => alert('dfdfhdf')}
-					/>
+				activator={({ handleOpen }) => (
+					<PressableText text='Cheeck' onPress={handleOpen} />
 				)}
 			/>
 		</View>
