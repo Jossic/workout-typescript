@@ -8,6 +8,7 @@ import {
 	Alert,
 	useWindowDimensions,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import PressableText from './PressableText';
 
 interface ModalProps {
@@ -37,9 +38,9 @@ const Modal: React.FC<ModalProps> = ({ activator: Activator, children }) => {
 						{children}
 
 						<Pressable
-							style={[styles.button, styles.buttonClose]}
+							style={styles.buttonClose}
 							onPress={() => setModalVisible(!modalVisible)}>
-							<Text style={styles.textStyle}>Hide Modal</Text>
+							<Ionicons name='close' size={24} color='black' />
 						</Pressable>
 					</View>
 				</View>
@@ -90,6 +91,15 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F194FF',
 	},
 	buttonClose: {
+		height: 50,
+		width: 50,
+		borderRadius: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		position: 'absolute',
+		bottom: 20,
+		elevation: 2,
 		backgroundColor: '#2196F3',
 	},
 	textStyle: {
