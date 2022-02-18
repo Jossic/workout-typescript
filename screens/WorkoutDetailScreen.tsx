@@ -1,6 +1,8 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
+import { getWorkoutBySlug } from '../storage/workout';
 
 type WorkoutDetailScreenProps = {
 	route: { params: { slug: string } };
@@ -8,9 +10,11 @@ type WorkoutDetailScreenProps = {
 type Navigation = WorkoutDetailScreenProps & NativeStackHeaderProps;
 
 const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
+	const workout = useWorkoutBySlug(route.params.slug);
+
 	return (
 		<View style={styles.container}>
-			<Text>WorkoutDetailScreen - {route.params.slug}</Text>
+			<Text>WorkoutDetailScreen - {workout?.name}</Text>
 		</View>
 	);
 };
