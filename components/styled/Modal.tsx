@@ -12,9 +12,10 @@ import PressableText from './PressableText';
 
 interface ModalProps {
 	activator?: React.FC<{ handleOpen: () => void }>;
+	children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ activator: Activator }) => {
+const Modal: React.FC<ModalProps> = ({ activator: Activator, children }) => {
 	const { height, width } = useWindowDimensions();
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	return (
@@ -33,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({ activator: Activator }) => {
 							styles.modalView,
 							{ height: height * 0.7, width: width * 0.8 },
 						]}>
-						<Text style={styles.modalText}>Hello World!</Text>
+						{children}
 
 						<Pressable
 							style={[styles.button, styles.buttonClose]}

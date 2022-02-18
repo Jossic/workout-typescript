@@ -23,8 +23,24 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 			<Modal
 				activator={({ handleOpen }) => (
 					<PressableText text='Cheeck' onPress={handleOpen} />
-				)}
-			/>
+				)}>
+				<Text
+					style={{
+						marginBottom: 15,
+						textAlign: 'center',
+					}}>
+					Hello World!
+				</Text>
+			</Modal>
+			<Modal>
+				<Text
+					style={{
+						marginBottom: 15,
+						textAlign: 'center',
+					}}>
+					Hello there!
+				</Text>
+			</Modal>
 		</View>
 	);
 };
