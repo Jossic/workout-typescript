@@ -1,20 +1,31 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Pressable } from 'react-native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import OrbitonText from '../components/styled/OrbitonText';
 import WorkoutItem from '../components/WorkoutItem';
 import data from '../data.json';
+import { getWorkouts } from '../storage/workout';
 import { Workout } from '../types/data';
 
 type HomeScreenProps = NativeStackHeaderProps;
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+	const [workouts, setWorkouts] = useState<Workout[]>([]);
+
+	useEffect(() => {
+		async function getData() {
+			const _workouts = await getWorkouts();
+			setWorkouts(_workouts);
+		}
+		getData();
+	}, []);
 	return (
 		<View style={styles.container}>
 			<OrbitonText style={{ fontSize: 30 }}>Workouuuuts</OrbitonText>
 			<FlatList
-				data={data as Workout[]}
+				data={workouts}
 				keyExtractor={(item) => item.slug}
 				renderItem={({ item }) => (
 					<Pressable
