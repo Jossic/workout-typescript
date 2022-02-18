@@ -8,6 +8,7 @@ import {
 	Text,
 	View,
 } from 'react-native';
+import PressableText from '../components/styled/PressableText';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
 
 type WorkoutDetailScreenProps = {
@@ -25,9 +26,7 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	return (
 		<View style={styles.container}>
 			<Text>WorkoutDetailScreen - {workout?.name}</Text>
-			<Pressable onPress={() => Alert.alert('Press')}>
-				<Text>Check sentense</Text>
-			</Pressable>
+			<PressableText text='Cheeeeck' onPress={() => alert('Alert !')} />
 		</View>
 	);
 };
