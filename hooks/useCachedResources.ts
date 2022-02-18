@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import { containsKey, getData, saveData } from '../storage';
 import data from '../data.json';
+import { getWorkouts, initWorkouts } from '../storage/workout';
 
 export const useCachedResources = () => {
 	const [isLoadingComplete, setIsLoadingComplete] = useState(false);
@@ -9,10 +10,7 @@ export const useCachedResources = () => {
 	useEffect(() => {
 		const loadResourcesAndDataAsync = async () => {
 			try {
-				const hasStoredWorkout = await containsKey('workout-data');
-				if (!hasStoredWorkout) {
-					await saveData('workout-data', data);
-				}
+				await initWorkouts();
 				await Font.loadAsync({
 					Lobster: require('../assets/fonts/Lobster-Regular.ttf'),
 					Shizuru: require('../assets/fonts/Shizuru-Regular.ttf'),
@@ -22,7 +20,7 @@ export const useCachedResources = () => {
 			} catch (error) {
 				console.warn(`error =>`, error);
 			} finally {
-				const workout = await getData('workout-data');
+				const workouts = await getWorkouts();
 				setIsLoadingComplete(true);
 			}
 		};
