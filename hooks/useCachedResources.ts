@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
-import { containsKey, getData, saveData } from '../storage';
-import data from '../data.json';
-import { getWorkouts, initWorkouts } from '../storage/workout';
+import { initWorkouts } from '../storage/workout';
 
 export const useCachedResources = () => {
 	const [isLoadingComplete, setIsLoadingComplete] = useState(false);
@@ -20,7 +18,6 @@ export const useCachedResources = () => {
 			} catch (error) {
 				console.warn(`error =>`, error);
 			} finally {
-				const workouts = await getWorkouts();
 				setIsLoadingComplete(true);
 			}
 		};
