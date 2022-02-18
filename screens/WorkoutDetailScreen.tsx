@@ -4,12 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 
 type WorkoutDetailScreenProps = NativeStackHeaderProps;
 
-const WorkoutDetailScreen: React.FC<WorkoutDetailScreenProps> = ({
-	navigation,
-}) => {
+const WorkoutDetailScreen: React.FC<WorkoutDetailScreenProps> = ({ route }) => {
 	return (
 		<View style={styles.container}>
-			<Text>WorkoutDetailScreen</Text>
+			<Text>WorkoutDetailScreen - {route.params.slug}</Text>
 		</View>
 	);
 };

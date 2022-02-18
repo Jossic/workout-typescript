@@ -28,6 +28,7 @@ function RootNavigator() {
 				name='WorkoutDetail'
 				component={WorkoutDetailScreen}
 				// options={{ headerShown: false }}
+				options={{ title: 'Workout Details' }}
 			/>
 		</Stack.Navigator>
 	);
