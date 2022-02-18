@@ -1,5 +1,6 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
+import { Pressable } from 'react-native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import OrbitonText from '../components/styled/OrbitonText';
 import WorkoutItem from '../components/WorkoutItem';
@@ -15,7 +16,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 			<FlatList
 				data={data as Workout[]}
 				keyExtractor={(item) => item.slug}
-				renderItem={({ item }) => <WorkoutItem workout={item} />}
+				renderItem={({ item }) => (
+					<Pressable onPress={() => console.log('press')}>
+						<WorkoutItem workout={item} />
+					</Pressable>
+				)}
 			/>
 		</View>
 	);
