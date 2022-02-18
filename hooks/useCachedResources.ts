@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
-import { getData, saveData } from '../storage';
+import { containsKey, getData, saveData } from '../storage';
 import data from '../data.json';
 
 export const useCachedResources = () => {
@@ -9,7 +9,10 @@ export const useCachedResources = () => {
 	useEffect(() => {
 		const loadResourcesAndDataAsync = async () => {
 			try {
-				await saveData('workout-data', data);
+				const hasStoredWorkout = await containsKey('workout-data');
+				if (!hasStoredWorkout) {
+					await saveData('workout-data', data);
+				}
 				await Font.loadAsync({
 					Lobster: require('../assets/fonts/Lobster-Regular.ttf'),
 					Shizuru: require('../assets/fonts/Shizuru-Regular.ttf'),
