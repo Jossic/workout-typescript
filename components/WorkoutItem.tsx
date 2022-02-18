@@ -1,13 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Workout } from '../types/data';
 import { formatSec } from '../utils/time';
 
 interface WorkoutItemProps {
 	workout: Workout;
+	children?: React.ReactNode;
+	childStyle?: StyleProp<ViewStyle>;
 }
 
-const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
+const WorkoutItem: React.FC<WorkoutItemProps> = ({
+	workout,
+	children,
+	childStyle = {},
+}) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.name}>{workout.name}</Text>
@@ -17,6 +23,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
 			<Text style={styles.difficulty}>
 				Difficulté: {workout.difficulty}
 			</Text>
+			{children && <View style={childStyle}>{children}</View>}
 		</View>
 	);
 };
@@ -30,7 +37,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		padding: 10,
 		minWidth: '90%',
-		maxHeight: 100,
+		maxHeight: 140,
 		margin: 5,
 	},
 	name: {
