@@ -48,7 +48,8 @@ const Modal: React.FC<ModalProps> = ({ activator: Activator, children }) => {
 				<Activator handleOpen={() => setModalVisible(!modalVisible)} />
 			) : (
 				<PressableText
-					text='Cheeck'
+					text='Check'
+					style={styles.button}
 					onPress={() => setModalVisible(!modalVisible)}
 				/>
 			)}

@@ -4,6 +4,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Modal from '../components/styled/Modal';
 import PressableText from '../components/styled/PressableText';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
+import { formatSec } from '../utils/time';
 
 type WorkoutDetailScreenProps = {
 	route: { params: { slug: string } };
@@ -22,24 +23,23 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 			<Text>WorkoutDetailScreen - {workout?.name}</Text>
 			<Modal
 				activator={({ handleOpen }) => (
-					<PressableText text='Cheeck' onPress={handleOpen} />
+					<PressableText
+						text='Cheeck'
+						style={{
+							backgroundColor: 'lightblue',
+							borderRadius: 5,
+							padding: 10,
+							marginTop: 10,
+						}}
+						onPress={handleOpen}
+					/>
 				)}>
-				<Text
-					style={{
-						marginBottom: 15,
-						textAlign: 'center',
-					}}>
-					Hello World!
-				</Text>
-			</Modal>
-			<Modal>
-				<Text
-					style={{
-						marginBottom: 15,
-						textAlign: 'center',
-					}}>
-					Hello there!
-				</Text>
+				{workout.sequence.map((sequence) => (
+					<Text key={sequence.slug}>
+						{sequence.name}|{sequence.type}|
+						{formatSec(sequence.duration)}|
+					</Text>
+				))}
 			</Modal>
 		</View>
 	);
