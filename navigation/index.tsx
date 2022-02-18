@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import PlannerScreen from '../screens/PlannerScreen';
+import WorkoutDetailScreen from '../screens/WorkoutDetailScreen';
 
 export default function Navigation() {
 	return (
@@ -22,6 +23,11 @@ function RootNavigator() {
 				name='Root'
 				component={TabNavigator}
 				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name='WorkoutDetail'
+				component={WorkoutDetailScreen}
+				// options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
 	);

@@ -17,7 +17,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 				data={data as Workout[]}
 				keyExtractor={(item) => item.slug}
 				renderItem={({ item }) => (
-					<Pressable onPress={() => console.log('press')}>
+					<Pressable
+						onPress={() => navigation.navigate('WorkoutDetail')}>
 						<WorkoutItem workout={item} />
 					</Pressable>
 				)}
