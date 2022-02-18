@@ -12,7 +12,7 @@ import PressableText from './PressableText';
 
 interface ModalProps {}
 
-const Modal: React.FC<ModalProps> = () => {
+const Modal: React.FC<ModalProps> = ({ activator: Activator }) => {
 	const { height, width } = useWindowDimensions();
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	return (
@@ -41,10 +41,14 @@ const Modal: React.FC<ModalProps> = () => {
 					</View>
 				</View>
 			</RNModal>
-			<PressableText
-				text='Cheeck'
-				onPress={() => setModalVisible(!modalVisible)}
-			/>
+			{Activator ? (
+				<Activator />
+			) : (
+				<PressableText
+					text='Cheeck'
+					onPress={() => setModalVisible(!modalVisible)}
+				/>
+			)}
 		</View>
 	);
 };

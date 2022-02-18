@@ -2,6 +2,7 @@ import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Modal from '../components/styled/Modal';
+import PressableText from '../components/styled/PressableText';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
 
 type WorkoutDetailScreenProps = {
@@ -19,7 +20,14 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	return (
 		<View style={styles.container}>
 			<Text>WorkoutDetailScreen - {workout?.name}</Text>
-			<Modal />
+			<Modal
+				activator={() => (
+					<PressableText
+						text='Cheeck'
+						onPress={() => alert('dfdfhdf')}
+					/>
+				)}
+			/>
 		</View>
 	);
 };
