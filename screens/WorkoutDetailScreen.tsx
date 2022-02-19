@@ -7,6 +7,8 @@ import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
 import { formatSec } from '../utils/time';
 import { Ionicons } from '@expo/vector-icons';
 import WorkoutItem from '../components/WorkoutItem';
+import { Sequence } from '../types/data';
+import { useEffect } from 'react';
 
 type WorkoutDetailScreenProps = {
 	route: { params: { slug: string } };
@@ -15,6 +17,26 @@ type Navigation = WorkoutDetailScreenProps & NativeStackHeaderProps;
 
 const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	const workout = useWorkoutBySlug(route.params.slug);
+	const [sequence, setSequence] = useState<Sequence[]>([]);
+	const [countDown, setCountDown] = useState<number>(-1);
+	const [trackerIdx, setTrackerIdx] = useState<number>(-1);
+
+	useEffect(() => {
+		if (trackerIdx === -1) return;
+		setCountDown(workout!.sequence[trackerIdx].duration);
+		const intervalId = window.setInterval(() => {
+			setCountDown((count) => {
+				console.log(`count =>`, count);
+				return count - 1;
+			});
+		}, 1000);
+		return () => window.clearInterval(intervalId);
+	}, [trackerIdx]);
+
+	const addItemToSequence = (idx: number) => {
+		setSequence([...sequence, workout!.sequence[idx]]);
+		setTrackerIdx(idx);
+	};
 
 	if (!workout) {
 		return <ActivityIndicator />;
@@ -58,7 +80,14 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 				</Modal>
 			</WorkoutItem>
 			<View>
-				<Ionicons name='play-circle' size={80} color='blue' />
+				{sequence.length === 0 && (
+					<Ionicons
+						onPress={() => addItemToSequence(0)}
+						name='play-circle'
+						size={80}
+						color='blue'
+					/>
+				)}
 			</View>
 		</View>
 	);
