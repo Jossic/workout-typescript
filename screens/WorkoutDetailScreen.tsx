@@ -90,6 +90,12 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 						color='blue'
 					/>
 				)}
+
+				{sequence.length > 0 && countDown >= 0 && (
+					<View>
+						<Text style={{ fontSize: 50 }}>{countDown}</Text>
+					</View>
+				)}
 			</View>
 		</View>
 	);
