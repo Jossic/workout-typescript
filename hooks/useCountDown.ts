@@ -9,7 +9,7 @@ export const useCountDown = (idx: number, initialCount: number) => {
 			setCountDown((count) => {
 				return count - 1;
 			});
-		}, 50);
+		}, 10);
 		return cleanup;
 	}, [idx]);
 

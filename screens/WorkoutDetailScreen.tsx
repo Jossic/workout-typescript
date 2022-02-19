@@ -43,6 +43,8 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	if (!workout) {
 		return <ActivityIndicator />;
 	}
+	const hasReachedEnd =
+		sequence.length === workout.sequence.length && countDown === 0;
 
 	return (
 		<View style={styles.container}>
@@ -96,6 +98,15 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 						<Text style={{ fontSize: 50 }}>{countDown}</Text>
 					</View>
 				)}
+			</View>
+			<View>
+				<Text style={{ fontSize: 50 }}>
+					{sequence.length === 0
+						? 'Prepare'
+						: hasReachedEnd
+						? 'Great Job !'
+						: sequence[trackerIdx].name}
+				</Text>
 			</View>
 		</View>
 	);
