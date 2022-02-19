@@ -25,7 +25,15 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 		trackerIdx >= 0 ? sequence[trackerIdx].duration : -1
 	);
 
-	console.log(`countDown =>`, countDown);
+	useEffect(() => {
+		if (!workout) return;
+
+		if (trackerIdx === workout.sequence.length - 1) return;
+
+		if (countDown === 0) {
+			addItemToSequence(trackerIdx + 1);
+		}
+	}, [countDown]);
 
 	const addItemToSequence = (idx: number) => {
 		setSequence([...sequence, workout!.sequence[idx]]);

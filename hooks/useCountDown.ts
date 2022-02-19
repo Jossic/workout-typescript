@@ -7,10 +7,9 @@ export const useCountDown = (idx: number, initialCount: number) => {
 		if (idx === -1) return;
 		intervalRef.current = window.setInterval(() => {
 			setCountDown((count) => {
-				// console.log(`count =>`, count);
 				return count - 1;
 			});
-		}, 1000);
+		}, 50);
 		return cleanup;
 	}, [idx]);
 
