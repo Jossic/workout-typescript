@@ -57,6 +57,9 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 					))}
 				</Modal>
 			</WorkoutItem>
+			<View>
+				<Ionicons name='play-circle' size={80} color='blue' />
+			</View>
 		</View>
 	);
 };
