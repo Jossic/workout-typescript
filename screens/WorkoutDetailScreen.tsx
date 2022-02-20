@@ -86,9 +86,30 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 				</Modal>
 			</WorkoutItem>
 			<View>
-				{sequence.length === 0 && (
+				{sequence.length === 0 ? (
 					<Ionicons
 						onPress={() => addItemToSequence(0)}
+						name='play-circle'
+						size={80}
+						color='blue'
+					/>
+				) : isRunning ? (
+					<Ionicons
+						onPress={() => {
+							stop();
+						}}
+						name='pause-circle'
+						size={80}
+						color='blue'
+					/>
+				) : (
+					<Ionicons
+						onPress={() => {
+							if (hasReachedEnd) {
+							} else {
+								start(countDown);
+							}
+						}}
 						name='play-circle'
 						size={80}
 						color='blue'
