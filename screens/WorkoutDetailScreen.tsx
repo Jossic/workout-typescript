@@ -36,7 +36,13 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	}, [countDown]);
 
 	const addItemToSequence = (idx: number) => {
-		const newSequence = [...sequence, workout!.sequence[idx]];
+		let newSequence = [];
+
+		if (idx > 0) {
+			newSequence = [...sequence, workout!.sequence[idx]];
+		} else {
+			newSequence = [workout!.sequence[idx]];
+		}
 		setSequence(newSequence);
 		setTrackerIdx(idx);
 		start(newSequence[idx].duration);
@@ -106,6 +112,7 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 					<Ionicons
 						onPress={() => {
 							if (hasReachedEnd) {
+								addItemToSequence(0);
 							} else {
 								start(countDown);
 							}
