@@ -20,7 +20,7 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	const workout = useWorkoutBySlug(route.params.slug);
 	const [sequence, setSequence] = useState<Sequence[]>([]);
 	const [trackerIdx, setTrackerIdx] = useState<number>(-1);
-	const { countDown, isRunning, stop } = useCountDown(
+	const { countDown, isRunning, stop, start } = useCountDown(
 		trackerIdx,
 		trackerIdx >= 0 ? sequence[trackerIdx].duration : -1
 	);
@@ -38,6 +38,7 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	const addItemToSequence = (idx: number) => {
 		setSequence([...sequence, workout!.sequence[idx]]);
 		setTrackerIdx(idx);
+		start();
 	};
 
 	if (!workout) {
