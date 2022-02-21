@@ -5,6 +5,7 @@ import ExerciseForm, { Excercice } from '../components/ExerciseForm';
 import { Sequence, SequenceType } from '../types/data';
 import slugify from 'slugify';
 import ExerciseItem from '../components/ExerciseItem';
+import PressableText from '../components/styled/PressableText';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
@@ -28,7 +29,19 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 			<FlatList
 				keyExtractor={(item) => item.slug}
 				data={seqItems}
-				renderItem={ExerciseItem}
+				renderItem={({ item, index }) => (
+					<ExerciseItem item={item}>
+						<PressableText
+							buttonStyle={{}}
+							text='Remove'
+							onPressIn={() => {
+								const items = [...seqItems];
+								items.splice(index, 1);
+								setSeqItems(items);
+							}}
+						/>
+					</ExerciseItem>
+				)}
 			/>
 			<ExerciseForm onSubmit={handleFormSubmit} />
 		</View>
