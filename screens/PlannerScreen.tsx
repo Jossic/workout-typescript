@@ -1,17 +1,14 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import WorkoutForm from '../components/WorkoutForm';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
 const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
-			<Text>PlannerScreen</Text>
-			<Button
-				title='Go to Home'
-				onPress={() => navigation.navigate('Home')}
-			/>
+			<WorkoutForm />
 		</View>
 	);
 };
@@ -23,5 +20,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+		paddingHorizontal: 20,
 	},
 });
