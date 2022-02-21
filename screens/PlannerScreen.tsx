@@ -2,12 +2,12 @@ import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ExerciseForm, { Excercice } from '../components/ExerciseForm';
-import { Sequence, SequenceType } from '../types/data';
+import { Sequence, SequenceType, Workout } from '../types/data';
 import slugify from 'slugify';
 import ExerciseItem from '../components/ExerciseItem';
 import PressableText from '../components/styled/PressableText';
 import Modal from '../components/styled/Modal';
-import WorkoutForm, { Workout } from '../components/WorkoutForm';
+import WorkoutForm, { WorkoutData } from '../components/WorkoutForm';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
@@ -25,11 +25,19 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 
 		setSeqItems([...seqItems, sequenceItem]);
 	};
-	const handleFormSubmitForWorkout = (form: Workout) => {
-		const workoutItem: Workout = {
-			name: form.name,
-			slug: slugify(`${form.name}-${Date.now()}`, { lower: true }),
-		};
+	const handleFormSubmitForWorkout = (form: WorkoutData) => {
+		if (seqItems.length > 0) {
+			const duration = seqItems.reduce((acc, item) => {
+				return acc + item.duration;
+			}, 0);
+			const workoutItem: Workout = {
+				name: form.name,
+				slug: slugify(`${form.name}-${Date.now()}`, { lower: true }),
+				duration,
+				difficulty: 'easy',
+				sequence: [...seqItems],
+			};
+		}
 
 		// setSeqItems([...seqItems, workoutItem]);
 	};

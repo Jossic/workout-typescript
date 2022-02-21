@@ -4,13 +4,13 @@ import PressableText from './styled/PressableText';
 import { useForm, Controller } from 'react-hook-form';
 import { Picker } from '@react-native-picker/picker';
 
-export type Workout = {
+export type WorkoutData = {
 	name: string;
 	slug: string;
 };
 
 interface WorkoutFormProps {
-	onSubmit: (form: Workout) => void;
+	onSubmit: (form: WorkoutData) => void;
 }
 
 const WorkoutForm: React.FC<WorkoutFormProps> = ({
@@ -44,7 +44,7 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 				<PressableText
 					text='Envoyer'
 					onPress={handleSubmit((data) => {
-						onSubmit(data as Workout);
+						onSubmit(data as WorkoutData);
 					})}
 				/>
 			</View>
