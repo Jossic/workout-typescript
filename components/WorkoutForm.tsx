@@ -6,22 +6,22 @@ import { useForm, Controller } from 'react-hook-form';
 export type Excercice = {
 	name: string;
 	duration: string;
+	type: string;
+	reps?: string;
 };
 
 interface WorkoutFormProps {
-	// onSubmit: (form: Excercice) => void;
+	onSubmit: (form: Excercice) => void;
 }
 
-const WorkoutForm: React.FC<WorkoutFormProps> = ({}: // onSubmit,
-WorkoutFormProps) => {
+const WorkoutForm: React.FC<WorkoutFormProps> = ({
+	onSubmit,
+}: WorkoutFormProps) => {
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
-		defaultValues: { name: '', duration: '' },
-	});
-	const onSubmit = (data: Excercice) => console.log('data => ', data);
+	} = useForm();
 
 	return (
 		<View style={styles.container}>
@@ -37,6 +37,7 @@ WorkoutFormProps) => {
 							style={styles.input}
 							onChangeText={onChange}
 							value={value}
+							placeholder='Nom'
 						/>
 					)}
 					name='name'
@@ -46,19 +47,51 @@ WorkoutFormProps) => {
 					rules={{
 						required: true,
 					}}
-					render={({ field: { onChange, onBlur, value } }) => (
+					render={({ field: { onChange, value } }) => (
 						<TextInput
 							style={styles.input}
-							onBlur={onBlur}
+							placeholder='Durée'
 							onChangeText={onChange}
 							value={value}
 						/>
 					)}
 					name='duration'
 				/>
+				<Controller
+					control={control}
+					rules={{
+						required: true,
+					}}
+					render={({ field: { onChange, value } }) => (
+						<TextInput
+							style={styles.input}
+							placeholder='Type'
+							onChangeText={onChange}
+							value={value}
+						/>
+					)}
+					name='type'
+				/>
+				<Controller
+					control={control}
+					rules={{
+						required: false,
+					}}
+					render={({ field: { onChange, value } }) => (
+						<TextInput
+							style={styles.input}
+							placeholder='Reps'
+							onChangeText={onChange}
+							value={value}
+						/>
+					)}
+					name='reps'
+				/>
 				<PressableText
 					text='Envoyer'
-					onPress={handleSubmit(onSubmit)}
+					onPress={handleSubmit((data) =>
+						onSubmit(data as Excercice)
+					)}
 				/>
 			</View>
 		</View>

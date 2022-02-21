@@ -6,13 +6,13 @@ import WorkoutForm, { Excercice } from '../components/WorkoutForm';
 type PlannerScreenProps = NativeStackHeaderProps;
 
 const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
-	// const handleFormSubmit = (form: Excercice) => {
-	// 	alert(`${form.name} - ${form.duration}`);
-	// };
+	const handleFormSubmit = (form: Excercice) => {
+		alert(`${form.name} - ${form.duration} - ${form.type} - ${form.reps}`);
+	};
 
 	return (
 		<View style={styles.container}>
-			<WorkoutForm />
+			<WorkoutForm onSubmit={handleFormSubmit} />
 		</View>
 	);
 };
