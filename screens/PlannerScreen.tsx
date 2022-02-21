@@ -25,6 +25,17 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 
 		setSeqItems([...seqItems, sequenceItem]);
 	};
+
+	const computeDiff = (exercisesCount: number, workoutDuration: number) => {
+		const intensity = workoutDuration / exercisesCount;
+
+		if (intensity <= 60) {
+			return 'hard';
+		} else if (intensity <= 100) {
+			return 'normal';
+		} else return 'easy';
+	};
+
 	const handleFormSubmitForWorkout = (form: WorkoutData) => {
 		if (seqItems.length > 0) {
 			const duration = seqItems.reduce((acc, item) => {
@@ -34,7 +45,7 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 				name: form.name,
 				slug: slugify(`${form.name}-${Date.now()}`, { lower: true }),
 				duration,
-				difficulty: 'easy',
+				difficulty: computeDiff(seqItems.length, duration),
 				sequence: [...seqItems],
 			};
 		}
