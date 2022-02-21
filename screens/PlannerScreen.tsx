@@ -1,11 +1,12 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ExerciseForm, { Excercice } from '../components/ExerciseForm';
 import { Sequence, SequenceType } from '../types/data';
 import slugify from 'slugify';
 import ExerciseItem from '../components/ExerciseItem';
 import PressableText from '../components/styled/PressableText';
+import Modal from '../components/styled/Modal';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
@@ -44,6 +45,30 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 				)}
 			/>
 			<ExerciseForm onSubmit={handleFormSubmit} />
+			<View>
+				<Modal
+					activator={({ handleOpen }) => (
+						<PressableText
+							text='Workout'
+							style={{
+								backgroundColor: 'lightblue',
+								borderRadius: 5,
+								padding: 10,
+								marginTop: 10,
+							}}
+							buttonStyle={{}}
+							textStyle={{
+								fontWeight: 'bold',
+								textAlign: 'center',
+							}}
+							onPress={handleOpen}
+						/>
+					)}>
+					<View>
+						<Text>Simple form</Text>
+					</View>
+				</Modal>
+			</View>
 		</View>
 	);
 };
