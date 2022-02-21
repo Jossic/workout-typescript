@@ -90,60 +90,65 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 					))}
 				</Modal>
 			</WorkoutItem>
-			<View>
-				{sequence.length === 0 ? (
-					<Ionicons
-						onPress={() => addItemToSequence(0)}
-						name='play-circle'
-						size={80}
-						color='blue'
-					/>
-				) : isRunning ? (
-					<Ionicons
-						onPress={() => {
-							stop();
-						}}
-						name='pause-circle'
-						size={80}
-						color='blue'
-					/>
-				) : (
-					<Ionicons
-						onPress={() => {
-							if (hasReachedEnd) {
-								addItemToSequence(0);
-							} else {
-								start(countDown);
-							}
-						}}
-						name='play-circle'
-						size={80}
-						color='blue'
-					/>
-				)}
+			<View style={styles.wrapper}>
+				<View style={styles.counterUI}>
+					<View>
+						{sequence.length === 0 ? (
+							<Ionicons
+								onPress={() => addItemToSequence(0)}
+								name='play-circle'
+								size={80}
+								color='blue'
+							/>
+						) : isRunning ? (
+							<Ionicons
+								onPress={() => {
+									stop();
+								}}
+								name='pause-circle'
+								size={80}
+								color='blue'
+							/>
+						) : (
+							<Ionicons
+								onPress={() => {
+									if (hasReachedEnd) {
+										addItemToSequence(0);
+									} else {
+										start(countDown);
+									}
+								}}
+								name='play-circle'
+								size={80}
+								color='blue'
+							/>
+						)}
 
-				{sequence.length > 0 && countDown >= 0 && (
+						{sequence.length > 0 && countDown >= 0 && (
+							<View>
+								<Text style={{ fontSize: 50 }}>
+									{countDown > sequence[trackerIdx].duration
+										? startupSeq[
+												countDown -
+													sequence[trackerIdx]
+														.duration -
+													1
+										  ]
+										: countDown}
+								</Text>
+							</View>
+						)}
+					</View>
 					<View>
 						<Text style={{ fontSize: 50 }}>
-							{countDown > sequence[trackerIdx].duration
-								? startupSeq[
-										countDown -
-											sequence[trackerIdx].duration -
-											1
-								  ]
-								: countDown}
+							{sequence.length === 0
+								? 'Prepare'
+								: hasReachedEnd
+								? 'Great Job !'
+								: sequence[trackerIdx].name}
 						</Text>
 					</View>
-				)}
-			</View>
-			<View>
-				<Text style={{ fontSize: 50 }}>
-					{sequence.length === 0
-						? 'Prepare'
-						: hasReachedEnd
-						? 'Great Job !'
-						: sequence[trackerIdx].name}
-				</Text>
+				</View>
 			</View>
 		</View>
 	);
@@ -162,5 +167,17 @@ const styles = StyleSheet.create({
 	sequences: {
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	counterUI: {
+		alignItems: 'center',
+	},
+	wrapper: {
+		marginTop: 10,
+		width: '90%',
+		borderRadius: 10,
+		borderColor: 'rgba(0,0,0,0.1)',
+		backgroundColor: '#fff',
+		borderWidth: 1,
+		padding: 10,
 	},
 });
