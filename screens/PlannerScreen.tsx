@@ -7,6 +7,7 @@ import slugify from 'slugify';
 import ExerciseItem from '../components/ExerciseItem';
 import PressableText from '../components/styled/PressableText';
 import Modal from '../components/styled/Modal';
+import WorkoutForm, { Workout } from '../components/WorkoutForm';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
@@ -24,6 +25,7 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 
 		setSeqItems([...seqItems, sequenceItem]);
 	};
+	const handleFormSubmitForWorkout = (form: Workout) => {};
 
 	return (
 		<View style={styles.container}>
@@ -65,7 +67,7 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 						/>
 					)}>
 					<View>
-						<Text>Simple form</Text>
+						<WorkoutForm onSubmit={handleFormSubmitForWorkout} />
 					</View>
 				</Modal>
 			</View>
