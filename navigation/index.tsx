@@ -58,7 +58,11 @@ function TabNavigator() {
 				tabBarInactiveTintColor: 'gray',
 			})}>
 			<Tab.Screen name='Home' component={HomeScreen} />
-			<Tab.Screen name='Planner' component={PlannerScreen} />
+			<Tab.Screen
+				name='Planner'
+				component={PlannerScreen}
+				options={{ unmountOnBlur: true }}
+			/>
 		</Tab.Navigator>
 	);
 }

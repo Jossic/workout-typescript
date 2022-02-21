@@ -98,6 +98,7 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 								onSubmit={(data) => {
 									handleFormSubmitForWorkout(data);
 									toggleModal();
+									navigation.navigate('Home');
 								}}
 							/>
 						</View>
