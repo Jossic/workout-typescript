@@ -3,13 +3,14 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import ExerciseForm, { Excercice } from '../components/ExerciseForm';
 import { Sequence, SequenceType } from '../types/data';
+import slugify from 'slugify';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
 const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 	const handleFormSubmit = (form: Excercice) => {
 		const sequenceItem: Sequence = {
-			slug: `${form.name}-${Date.now()}`,
+			slug: slugify(`${form.name}-${Date.now()}`, { lower: true }),
 			name: form.name,
 			type: form.type as SequenceType,
 			duration: Number(form.duration),
