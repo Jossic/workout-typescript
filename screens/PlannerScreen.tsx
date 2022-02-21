@@ -25,7 +25,14 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 
 		setSeqItems([...seqItems, sequenceItem]);
 	};
-	const handleFormSubmitForWorkout = (form: Workout) => {};
+	const handleFormSubmitForWorkout = (form: Workout) => {
+		const workoutItem: Workout = {
+			name: form.name,
+			slug: slugify(`${form.name}-${Date.now()}`, { lower: true }),
+		};
+
+		// setSeqItems([...seqItems, workoutItem]);
+	};
 
 	return (
 		<View style={styles.container}>

@@ -6,6 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 
 export type Workout = {
 	name: string;
+	slug: string;
 };
 
 interface WorkoutFormProps {
