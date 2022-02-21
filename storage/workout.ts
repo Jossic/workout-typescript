@@ -24,3 +24,9 @@ export const getWorkoutBySlug = async (slug: string): Promise<Workout> => {
 export const clearWorkouts = async (): Promise<void> => {
 	await removeData('workout-data');
 };
+
+export const saveWorkout = async (newWorkout: Workout): Promise<boolean> => {
+	const workouts = await getWorkouts();
+	await saveData('workout-data', [...workouts, newWorkout]);
+	return true;
+};

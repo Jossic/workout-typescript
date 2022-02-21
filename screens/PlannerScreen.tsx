@@ -8,6 +8,7 @@ import ExerciseItem from '../components/ExerciseItem';
 import PressableText from '../components/styled/PressableText';
 import Modal from '../components/styled/Modal';
 import WorkoutForm, { WorkoutData } from '../components/WorkoutForm';
+import { saveWorkout } from '../storage/workout';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
@@ -36,7 +37,7 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 		} else return 'easy';
 	};
 
-	const handleFormSubmitForWorkout = (form: WorkoutData) => {
+	const handleFormSubmitForWorkout = async (form: WorkoutData) => {
 		if (seqItems.length > 0) {
 			const duration = seqItems.reduce((acc, item) => {
 				return acc + item.duration;
@@ -48,9 +49,8 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 				difficulty: computeDiff(seqItems.length, duration),
 				sequence: [...seqItems],
 			};
+			await saveWorkout(workoutItem);
 		}
-
-		// setSeqItems([...seqItems, workoutItem]);
 	};
 
 	return (
@@ -95,8 +95,8 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 					{({ toggleModal }) => (
 						<View>
 							<WorkoutForm
-								onSubmit={(data) => {
-									handleFormSubmitForWorkout(data);
+								onSubmit={async (data) => {
+									await handleFormSubmitForWorkout(data);
 									toggleModal();
 									navigation.navigate('Home');
 								}}
