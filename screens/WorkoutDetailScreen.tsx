@@ -74,21 +74,27 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 							onPress={handleOpen}
 						/>
 					)}>
-					{workout.sequence.map((sequence, idx) => (
-						<View key={sequence.slug} style={styles.sequences}>
-							<Text>
-								{sequence.name}|{sequence.type}|
-								{formatSec(sequence.duration)}|
-							</Text>
-							{idx !== workout.sequence.length - 1 && (
-								<Ionicons
-									name='arrow-down-circle'
-									size={24}
-									color='black'
-								/>
-							)}
+					{() => (
+						<View>
+							{workout.sequence.map((sequence, idx) => (
+								<View
+									key={sequence.slug}
+									style={styles.sequences}>
+									<Text>
+										{sequence.name}|{sequence.type}|
+										{formatSec(sequence.duration)}|
+									</Text>
+									{idx !== workout.sequence.length - 1 && (
+										<Ionicons
+											name='arrow-down-circle'
+											size={24}
+											color='black'
+										/>
+									)}
+								</View>
+							))}
 						</View>
-					))}
+					)}
 				</Modal>
 			</WorkoutItem>
 			<View style={styles.wrapper}>

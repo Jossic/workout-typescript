@@ -13,12 +13,19 @@ import PressableText from './PressableText';
 
 interface ModalProps {
 	activator?: React.FC<{ handleOpen: () => void }>;
-	children: React.ReactNode;
+	children: React.FC<{
+		toggleModal: () => void;
+	}>;
 }
 
 const Modal: React.FC<ModalProps> = ({ activator: Activator, children }) => {
 	const { height, width } = useWindowDimensions();
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+	const toggleModal = () => {
+		setModalVisible(!modalVisible);
+	};
+
 	return (
 		<View>
 			<RNModal
@@ -35,23 +42,23 @@ const Modal: React.FC<ModalProps> = ({ activator: Activator, children }) => {
 							styles.modalView,
 							{ height: height * 0.7, width: width * 0.8 },
 						]}>
-						{children}
+						{children({ toggleModal })}
 
 						<Pressable
 							style={styles.buttonClose}
-							onPress={() => setModalVisible(!modalVisible)}>
+							onPress={toggleModal}>
 							<Ionicons name='close' size={24} color='black' />
 						</Pressable>
 					</View>
 				</View>
 			</RNModal>
 			{Activator ? (
-				<Activator handleOpen={() => setModalVisible(!modalVisible)} />
+				<Activator handleOpen={toggleModal} />
 			) : (
 				<PressableText
 					text='Check'
 					style={styles.button}
-					onPress={() => setModalVisible(!modalVisible)}
+					onPress={toggleModal}
 				/>
 			)}
 		</View>

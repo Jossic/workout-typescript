@@ -92,9 +92,16 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 							onPress={handleOpen}
 						/>
 					)}>
-					<View>
-						<WorkoutForm onSubmit={handleFormSubmitForWorkout} />
-					</View>
+					{({ toggleModal }) => (
+						<View>
+							<WorkoutForm
+								onSubmit={(data) => {
+									handleFormSubmitForWorkout(data);
+									toggleModal();
+								}}
+							/>
+						</View>
+					)}
 				</Modal>
 			</View>
 		</View>
