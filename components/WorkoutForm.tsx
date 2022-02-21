@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import PressableText from './styled/PressableText';
 import { useForm, Controller } from 'react-hook-form';
+import { Picker } from '@react-native-picker/picker';
 
 export type Excercice = {
 	name: string;
@@ -17,6 +18,8 @@ interface WorkoutFormProps {
 const WorkoutForm: React.FC<WorkoutFormProps> = ({
 	onSubmit,
 }: WorkoutFormProps) => {
+	const [type, setType] = useState<'exercise' | 'break' | 'stretch'>();
+
 	const {
 		control,
 		handleSubmit,
@@ -57,18 +60,38 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 					)}
 					name='duration'
 				/>
+
 				<Controller
 					control={control}
-					rules={{
-						required: true,
-					}}
 					render={({ field: { onChange, value } }) => (
-						<TextInput
-							style={styles.input}
-							placeholder='Type'
-							onChangeText={onChange}
-							value={value}
-						/>
+						// <TextInput
+						// 	style={styles.input}
+						// 	placeholder='Type'
+						// 	onChangeText={onChange}
+						// 	value={value}
+						// />
+						<>
+							<Text>Type</Text>
+							<Picker
+								selectedValue={type}
+								style={
+									Platform.OS === 'ios'
+										? styles.inputIOS
+										: styles.input
+								}
+								itemStyle={{ height: 40, marginTop: 10 }}
+								numberOfLines={1}
+								onValueChange={(itemValue, itemIndex) =>
+									setType(itemValue)
+								}>
+								<Picker.Item
+									label='Exercise'
+									value='Exercise'
+								/>
+								<Picker.Item label='Break' value='Break' />
+								<Picker.Item label='Stretch' value='Stretch' />
+							</Picker>
+						</>
 					)}
 					name='type'
 				/>
@@ -89,9 +112,10 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 				/>
 				<PressableText
 					text='Envoyer'
-					onPress={handleSubmit((data) =>
-						onSubmit(data as Excercice)
-					)}
+					onPress={handleSubmit((data) => {
+						data.type = type;
+						onSubmit(data as Excercice);
+					})}
 				/>
 			</View>
 		</View>
@@ -103,6 +127,7 @@ export default WorkoutForm;
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: '#fff',
+		padding: 10,
 	},
 	input: {
 		minWidth: '80%',
@@ -110,5 +135,8 @@ const styles = StyleSheet.create({
 		borderBottomColor: 'black',
 		borderBottomWidth: 2,
 		paddingHorizontal: 10,
+	},
+	inputIOS: {
+		maxHeight: 80,
 	},
 });

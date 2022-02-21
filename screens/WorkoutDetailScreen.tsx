@@ -66,6 +66,7 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 								padding: 10,
 								marginTop: 10,
 							}}
+							buttonStyle={{}}
 							textStyle={{
 								fontWeight: 'bold',
 								textAlign: 'center',
