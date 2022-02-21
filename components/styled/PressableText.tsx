@@ -17,7 +17,6 @@ type PressableTextProps = PressableProps & {
 };
 
 const PressableText: React.FC<PressableTextProps> = (props) => {
-	console.log(`props =>`, props);
 	return (
 		<Pressable {...props}>
 			<View

@@ -1,14 +1,20 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {
+	DarkTheme,
+	DefaultTheme,
+	NavigationContainer,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import PlannerScreen from '../screens/PlannerScreen';
 import WorkoutDetailScreen from '../screens/WorkoutDetailScreen';
+import { ColorSchemeName } from 'react-native';
 
-export default function Navigation() {
+export default function Navigation({ theme }: { theme: ColorSchemeName }) {
 	return (
-		<NavigationContainer>
+		<NavigationContainer
+			theme={theme === 'light' ? DefaultTheme : DarkTheme}>
 			<RootNavigator />
 		</NavigationContainer>
 	);
