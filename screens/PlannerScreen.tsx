@@ -1,9 +1,10 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import ExerciseForm, { Excercice } from '../components/ExerciseForm';
 import { Sequence, SequenceType } from '../types/data';
 import slugify from 'slugify';
+import ExerciseItem from '../components/ExerciseItem';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
@@ -27,7 +28,7 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 			<FlatList
 				keyExtractor={(item) => item.slug}
 				data={seqItems}
-				renderItem={({ item }) => <Text>{item.name}</Text>}
+				renderItem={ExerciseItem}
 			/>
 			<ExerciseForm onSubmit={handleFormSubmit} />
 		</View>
