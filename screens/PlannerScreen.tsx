@@ -1,6 +1,6 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
-import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import ExerciseForm, { Excercice } from '../components/ExerciseForm';
 import { Sequence, SequenceType } from '../types/data';
 import slugify from 'slugify';
@@ -8,6 +8,8 @@ import slugify from 'slugify';
 type PlannerScreenProps = NativeStackHeaderProps;
 
 const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
+	const [seqItems, setSeqItems] = useState<Sequence[]>([]);
+
 	const handleFormSubmit = (form: Excercice) => {
 		const sequenceItem: Sequence = {
 			slug: slugify(`${form.name}-${Date.now()}`, { lower: true }),
@@ -17,11 +19,16 @@ const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
 			reps: form.reps ? Number(form.reps) : undefined,
 		};
 
-		console.log(`sequenceItem =>`, sequenceItem);
+		setSeqItems([...seqItems, sequenceItem]);
 	};
 
 	return (
 		<View style={styles.container}>
+			<FlatList
+				keyExtractor={(item) => item.slug}
+				data={seqItems}
+				renderItem={({ item }) => <Text>{item.name}</Text>}
+			/>
 			<ExerciseForm onSubmit={handleFormSubmit} />
 		</View>
 	);
