@@ -1,14 +1,18 @@
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import WorkoutForm from '../components/WorkoutForm';
+import WorkoutForm, { Excercice } from '../components/WorkoutForm';
 
 type PlannerScreenProps = NativeStackHeaderProps;
 
 const PlannerScreen: React.FC<PlannerScreenProps> = ({ navigation }) => {
+	const handleFormSubmit = (form: Excercice) => {
+		alert(`${form.name} - ${form.duration}`);
+	};
+
 	return (
 		<View style={styles.container}>
-			<WorkoutForm />
+			<WorkoutForm onSubmit={handleFormSubmit} />
 		</View>
 	);
 };

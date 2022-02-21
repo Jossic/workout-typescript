@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import PressableText from './styled/PressableText';
 
-interface WorkoutFormProps {}
+export type Excercice = {
+	name: string;
+	duration: string;
+};
 
-const WorkoutForm: React.FC<WorkoutFormProps> = () => {
+interface WorkoutFormProps {
+	onSubmit: (form: Excercice) => void;
+}
+
+const WorkoutForm: React.FC<WorkoutFormProps> = ({
+	onSubmit,
+}: WorkoutFormProps) => {
 	const [form, setForm] = useState({ name: '', duration: '' });
 	console.log(`form =>`, form);
 
@@ -24,6 +34,7 @@ const WorkoutForm: React.FC<WorkoutFormProps> = () => {
 					style={styles.input}
 					onChangeText={onChangeText('duration')}
 				/>
+				<PressableText text='Envoyer' onPress={() => onSubmit(form)} />
 			</View>
 		</View>
 	);

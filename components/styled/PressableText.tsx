@@ -7,17 +7,34 @@ import {
 	Text,
 	TextStyle,
 	View,
+	ViewStyle,
 } from 'react-native';
 
 type PressableTextProps = PressableProps & {
 	text: string;
 	textStyle?: StyleProp<TextStyle>;
+	buttonStyle?: StyleProp<ViewStyle>;
 };
 
 const PressableText: React.FC<PressableTextProps> = (props) => {
+	console.log(`props =>`, props);
 	return (
 		<Pressable {...props}>
-			<Text style={props.textStyle}>{props.text}</Text>
+			<View
+				style={
+					props.buttonStyle
+						? props.buttonStyle
+						: styles.defaultButtonStyle
+				}>
+				<Text
+					style={
+						props.textStyle
+							? props.textStyle
+							: styles.defaultTextStyle
+					}>
+					{props.text}
+				</Text>
+			</View>
 		</Pressable>
 	);
 };
@@ -25,9 +42,20 @@ const PressableText: React.FC<PressableTextProps> = (props) => {
 export default PressableText;
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#d3d3d3',
-		paddingHorizontal: 25,
+	defaultButtonStyle: {
+		marginVertical: 15,
+		alignItems: 'center',
+		alignSelf: 'center',
+		justifyContent: 'center',
+		height: 50,
+		backgroundColor: 'lightblue',
+		width: '80%',
+		borderRadius: 10,
+		borderColor: 'rgba(0,0,0,0.1)',
+		borderWidth: 2,
+	},
+	defaultTextStyle: {
+		fontWeight: 'bold',
+		textTransform: 'uppercase',
 	},
 });
