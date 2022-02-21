@@ -20,10 +20,9 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 	const workout = useWorkoutBySlug(route.params.slug);
 	const [sequence, setSequence] = useState<Sequence[]>([]);
 	const [trackerIdx, setTrackerIdx] = useState<number>(-1);
-	const { countDown, isRunning, stop, start } = useCountDown(
-		trackerIdx
-		// trackerIdx >= 0 ? sequence[trackerIdx].duration : -1
-	);
+
+	const startupSeq = ['3', '2', '1', 'Go'].reverse();
+	const { countDown, isRunning, stop, start } = useCountDown(trackerIdx);
 
 	useEffect(() => {
 		if (!workout) return;
@@ -45,7 +44,7 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 		}
 		setSequence(newSequence);
 		setTrackerIdx(idx);
-		start(newSequence[idx].duration);
+		start(newSequence[idx].duration + startupSeq.length);
 	};
 
 	if (!workout) {
@@ -125,7 +124,15 @@ const WorkoutDetailScreen: React.FC<Navigation> = ({ route }) => {
 
 				{sequence.length > 0 && countDown >= 0 && (
 					<View>
-						<Text style={{ fontSize: 50 }}>{countDown}</Text>
+						<Text style={{ fontSize: 50 }}>
+							{countDown > sequence[trackerIdx].duration
+								? startupSeq[
+										countDown -
+											sequence[trackerIdx].duration -
+											1
+								  ]
+								: countDown}
+						</Text>
 					</View>
 				)}
 			</View>
