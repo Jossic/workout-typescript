@@ -11,13 +11,13 @@ export type Excercice = {
 	reps?: string;
 };
 
-interface WorkoutFormProps {
+interface ExcerciseFormProps {
 	onSubmit: (form: Excercice) => void;
 }
 
-const WorkoutForm: React.FC<WorkoutFormProps> = ({
+const ExcerciseForm: React.FC<ExcerciseFormProps> = ({
 	onSubmit,
-}: WorkoutFormProps) => {
+}: ExcerciseFormProps) => {
 	const [type, setType] = useState<'exercise' | 'break' | 'stretch'>();
 
 	const {
@@ -28,7 +28,7 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 
 	return (
 		<View style={styles.container}>
-			<Text>WorkoutForm</Text>
+			<Text>ExcerciseForm</Text>
 			<View>
 				<Controller
 					control={control}
@@ -74,12 +74,12 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 							<Text>Type</Text>
 							<Picker
 								selectedValue={type}
-								style={
+								itemStyle={
 									Platform.OS === 'ios'
 										? styles.inputIOS
 										: styles.input
 								}
-								itemStyle={{ height: 40, marginTop: 10 }}
+								// itemStyle={{ height: 40, marginTop: 10 }}
 								numberOfLines={1}
 								onValueChange={(itemValue, itemIndex) =>
 									setType(itemValue)
@@ -122,7 +122,7 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 	);
 };
 
-export default WorkoutForm;
+export default ExcerciseForm;
 
 const styles = StyleSheet.create({
 	container: {
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 	},
 	inputIOS: {
-		maxHeight: 80,
+		height: 40,
+		marginTop: 10,
 	},
 });
